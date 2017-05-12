@@ -1,5 +1,4 @@
-#FROM armhf/debian:jessie
-FROM resin/armv7hf-debian-qemu:latest
+FROM bestlibre/tiny-armhf:latest
 # Default configuration
 RUN [ "cross-build-start" ]
 
@@ -20,13 +19,7 @@ RUN  apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 COPY influxdb.conf /etc/influxdb/influxdb.conf
 
-# Add Tini
-ENV TINI_VERSION v0.14.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-armhf /tini
-RUN chmod +x /tini
-
 RUN [ "cross-build-end" ]
-# Run as mopidy user
 
 EXPOSE 8086
 
